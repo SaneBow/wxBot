@@ -25,11 +25,11 @@ function sendmsg(ans) {
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
     console.log("msg sent to: " + name);
-    $('.left.name:contains("文件传输助手")').click();
+    $('#conv_filehelper').click();
 }
 
 function chatbot() {
-    $('.left.name:contains("文件传输助手")').click();
+    $('#conv_filehelper').click();
     $('.unreadDot:visible').each(function()
     {
         name = $(this).parent().find(".left.name").text();
