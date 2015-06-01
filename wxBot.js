@@ -30,10 +30,10 @@ function sendmsg(ans) {
 
 function chatbot() {
     $('#conv_filehelper').click();
-    $('unreadDot:visible,unreadDotS:visible').each(function()
+    $('.unreadDot:visible,.unreadDotS:visible').each(function()
     {
         is_active = $(this).parent().find(".bot").hasClass("active");
-        alert(is_active);
+        is_active || return;
         name = $(this).parent().find(".left.name").text();
         console.log("msg from: " + name);
         $(this).click();    
