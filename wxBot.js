@@ -33,7 +33,7 @@ function chatbot() {
     $('unreadDot:visible,unreadDotS:visible').each(function()
     {
         is_active = $(this).parent().find(".bot").hasClass("active");
-        is_active || return;
+        alert(is_active);
         name = $(this).parent().find(".left.name").text();
         console.log("msg from: " + name);
         $(this).click();    
