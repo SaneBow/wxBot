@@ -1,1 +1,0 @@
-n=0;$.getScript("https://rawgit.com/dwachss/bililiteRange/master/jquery.sendkeys.js");$.getScript("https://rawgit.com/dwachss/bililiteRange/master/bililiteRange.js");input=$("#textInput");btn=$(".chatSend");setInterval(function(){input.sendkeys("I am a repeater");btn.click();n++;},60*1000*10);

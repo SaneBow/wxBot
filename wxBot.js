@@ -30,8 +30,10 @@ function sendmsg(ans) {
 
 function chatbot() {
     $('#conv_filehelper').click();
-    $('.unreadDot:visible').each(function()
+    $('unreadDot:visible,unreadDotS:visible').each(function()
     {
+        is_active = $(this).parent().find(".bot").hasClass("active");
+        is_active || return;
         name = $(this).parent().find(".left.name").text();
         console.log("msg from: " + name);
         $(this).click();    
@@ -48,5 +50,27 @@ function chatbot() {
     }); 
 }
 
+function botinit(){
+    //setInterval(chatbot,30*1000)
+    $(document).ready(function(){
+        //add bot notes
+        chats = document.getElementsByClassName('chatListColumn');
+        for (i=0;i<chats.length;i++) {
+            var bot = document.createElement('div');
+            bot.className='bot';
+            chats[i].appendChild(bot);
+        }
 
-//setInterval(chatbot,30*1000)
+        //listen on click event
+        $('bot').click(function(e){
+            e.stopPropagation();
+            $(this).toggleClass('active');
+        });
+
+        //start bot
+        setInterval(chatbot,30*1000);
+    });
+}
+
+
+botinit();
