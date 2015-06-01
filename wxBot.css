@@ -8,7 +8,7 @@
     top: 21px;
     -webkit-filter: opacity(0.2);
 }
-.chatPanel .chatListColumn .bot .active{
+.chatPanel .chatListColumn .bot.active{
     -webkit-filter: opacity(1);
 }
 
