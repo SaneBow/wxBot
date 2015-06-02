@@ -29,6 +29,11 @@ function sendmsg(ans) {
 }
 
 function chatbot() {
+    //if paused
+    $('.bot-home').hasClass('paused') && return;
+    //if no bot-took-overed
+    $('.bot.active').length == 0 && return;
+
     $('#conv_filehelper').click();
     $('.unreadDot:visible,.unreadDotS:visible').each(function()
     {
@@ -61,14 +66,23 @@ function botinit(){
             chats[i].appendChild(bot);
         }
 
-        //listen on click event
+        //listen on bot click event
         $('.bot').click(function(e){
             e.stopPropagation();
             $(this).toggleClass('active');
         });
 
         //add bot home
-        $('#profile').append('<img class="bot-home" src="https://baymaxphotobomb.net/it_IT/media/images/character-icon-baymax1.png" draggable="true"></img>');
+        $('#profile').append('<div><img class="bot-home tip" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax1.png" draggable="true"></img><span>drag & drop me ^_^</span></div>');
+
+        //add pause icon
+        $('#profile').append('<img class="bot-home pauseicon" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/pause.png" draggable="false"></img>');
+
+
+        //listen on bot-home click event
+        $('.bot-home').click(function(){
+            $(this).toggleClass('paused');
+        });
 
         //listen drag event
         jQuery.event.props.push('dataTransfer');

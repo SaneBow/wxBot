@@ -1,7 +1,7 @@
 .chatPanel .chatListColumn .bot{
     height: 30px;
     width: 30px;
-    background: url('https://baymaxphotobomb.net/it_IT/media/images/character-icon-baymax5.png') no-repeat;
+    background: url('https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax2.png') no-repeat;
     right: 42px;
     background-size: cover;
     position: absolute;
@@ -21,6 +21,16 @@
     position: absolute;
     left: 190px;
     top: -27px;
+}
+.bot-home.pauseicon {
+    height: 30px;
+    width: 30px;
+    left: 220px;
+    top: 5px;
+    display:none;
+}
+.bot-home.pauseicon.paused {
+    display:inline;
 }
 
 
