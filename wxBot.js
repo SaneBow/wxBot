@@ -80,6 +80,7 @@ function botinit(){
             dragend: function() {
                 $(this).css('opacity', '1');
                 $('.chatListColumn *').css('pointer-events','');
+                $('.chatListColumn').removeClass('over');
             },
         });
         $('.chatListColumn').on({

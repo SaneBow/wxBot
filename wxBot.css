@@ -12,7 +12,7 @@
     display:inline;
 }
 .chatPanel .chatListColumn.over{
-    border:1px solid green;
+    background: #81c348;
 }
 
 .bot-home {
