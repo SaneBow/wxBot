@@ -25,7 +25,7 @@
     top: -27px;
 }
 
-.bot-home.pauseicon {
+.bot-home.pauseico {
     height: 30px;
     width: 30px;
     left: 220px;
@@ -70,4 +70,19 @@ span.tooltip:after {
     top:-30px;
     opacity:0.8;
     display:none;
+}
+
+.blink {
+    -webkit-transition: opacity .8s ease-in-out;
+
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite; 
+
+    @-webkit-keyframes blinker {  
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+    }
 }

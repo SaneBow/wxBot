@@ -76,7 +76,7 @@ function botinit(){
         $('#profile').append([
         '<div id="bot-wrapper">',
             '<img class="bot-home botico" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax1.png" draggable="true" />',
-            '<span class="tooltip">drag & drop me</span>',
+            '<span class="tooltip blink">drag & drop me</span>',
             '<img class="bot-home pauseico" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/pause.png" draggable="false" />',
         '</div>'].join(''));
 
@@ -85,6 +85,9 @@ function botinit(){
         setTimeout(function(){
             $('#bot-wrapper span').hide();
         },10*1000);
+        $('.bot-home').mousedown(funcion(){
+            $(#bot-wrapper span).hide();
+        });
 
         //listen on bot-home click event
         $('.bot-home').click(function(){
