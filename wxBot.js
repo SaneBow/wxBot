@@ -75,9 +75,11 @@ function botinit(){
         $('.bot-home').on({
             dragstart: function() {
                 $(this).css('opacity', '0.5');
+                $('.chatListColumn *').css('pointer-events','none');
             },
             dragend: function() {
                 $(this).css('opacity', '1');
+                $('.chatListColumn *').css('pointer-events','');
             },
         });
         $('.chatListColumn').on({
@@ -88,7 +90,6 @@ function botinit(){
                 e.preventDefault();
             },
             dragleave: function(e) {
-                e.stopPropagation();
                 $(this).removeClass('over');
             },
             drop: function() {
