@@ -85,7 +85,8 @@ function botinit(){
         setTimeout(function(){
             $('#bot-wrapper span').hide();
         },10*1000);
-        $('.bot-home').mousedown(funcion(){
+
+        $('.bot-home').mousedown(function(){
             $('#bot-wrapper span').hide();
         });
 
