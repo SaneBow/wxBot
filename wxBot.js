@@ -72,6 +72,11 @@ function botinit(){
 
         //listen drag event
         jQuery.event.props.push('dataTransfer');
+        $(document).on('draginit dragstart dragover dragend drag drop', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+        });
         $('.bot-home').on({
             dragstart: function() {
                 $(this).css('opacity', '0.5');
@@ -87,7 +92,7 @@ function botinit(){
             dragover: function(e) {
                 e.preventDefault();
             },
-            dragleave: function() {
+            dragleave: function(e) {
                 $(this).removeClass('over');
             },
             drop: function() {
