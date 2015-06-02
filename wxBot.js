@@ -86,7 +86,7 @@ function botinit(){
             $('#bot-wrapper span').hide();
         },10*1000);
         $('.bot-home').mousedown(funcion(){
-            $(#bot-wrapper span).hide();
+            $('#bot-wrapper span').hide();
         });
 
         //listen on bot-home click event
