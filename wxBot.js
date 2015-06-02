@@ -30,7 +30,7 @@ function sendmsg(ans) {
 
 function chatbot() {
     //if paused
-    if ( ! $('.bot-home').hasClass('paused') ) return;
+    if ( $('.bot-home').hasClass('paused') ) return;
     //if no bot-took-overed
     if ( $('.bot.active').length == 0 )  return;
 
@@ -81,7 +81,7 @@ function botinit(){
 
         //listen on bot-home click event
         $('.bot-home').click(function(){
-            $(this).toggleClass('paused');
+            $('.bot-home').toggleClass('paused');
         });
 
         //listen drag event
