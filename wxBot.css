@@ -2,7 +2,7 @@
     height: 30px;
     width: 30px;
     background: url('https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax2.png') no-repeat;
-    right: 42px;
+    right: 35px;
     background-size: cover;
     position: absolute;
     top: 0px;
@@ -72,17 +72,15 @@ span.tooltip:after {
     display:none;
 }
 
-.blink {
-    -webkit-transition: opacity .8s ease-in-out;
 
-    -webkit-animation-name: blinker;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite; 
-
-    @-webkit-keyframes blinker {  
-        0% { opacity: 1.0; }
-        50% { opacity: 0.0; }
-        100% { opacity: 1.0; }
-    }
+@-webkit-keyframes blinker {
+  from {opacity: 1.0;}
+  to {opacity: 0.0;}
+}
+.blink{
+	-webkit-animation-name: blinker;
+	-webkit-animation-duration: 1.2s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:ease-in-out;
+	-webkit-animation-direction: alternate;
 }
