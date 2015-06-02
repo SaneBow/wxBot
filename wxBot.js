@@ -30,9 +30,9 @@ function sendmsg(ans) {
 
 function chatbot() {
     //if paused
-    $('.bot-home').hasClass('paused') && return;
+    if ( ! $('.bot-home').hasClass('paused') ) return;
     //if no bot-took-overed
-    $('.bot.active').length == 0 && return;
+    if ( $('.bot.active').length == 0 )  return;
 
     $('#conv_filehelper').click();
     $('.unreadDot:visible,.unreadDotS:visible').each(function()
