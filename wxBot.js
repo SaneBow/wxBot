@@ -157,10 +157,10 @@ function chatbot() {
         var observer = new MutationObserver(function(mutations) {
          mutations.forEach(function(mutation) {
            for (var i = 0; i < mutation.addedNodes.length; i++)
-             console.log($(mutation.addedNodes[i]));
+             console.log(mutation.addedNodes[i]);
          });
         });
-        observer.observe($('#chat_chatmsglist')[0], { childList: true, subtree: true});
+        observer.observe($('#chat_chatmsglist')[0], { childList: true});
     }
 
     //reply for red dotted item
