@@ -79,14 +79,12 @@ function buildbothome() {
     '</div>'].join(''));
 
     //show tooltip for 10s
-    setTimeout(function(){
-        $('img.botico').on('load',function(){
-            $('#bot-wrapper span').show();
-            setTimeout(function(){
-                $('#bot-wrapper span').hide();
-            },10*1000);
-        });
-    },500);
+    $('img.botico').load(function(){
+        $('#bot-wrapper span').show();
+        setTimeout(function(){
+            $('#bot-wrapper span').hide();
+        },10*1000);
+    });
 
     //clear tooltip on mousedown
     $('.bot-home').mousedown(function(){
