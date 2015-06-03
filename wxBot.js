@@ -72,8 +72,8 @@ function buildbothome() {
     '<div id="bot-wrapper">',
         '<img class="bot-home botico" title="wxBot - a WeChat chat bot" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax1.png" draggable="true" />',
         '<span class="tooltip blink">',
-            '<p>Drag & drop me - set up</p>',
-            '<p>Click me - pause/resume</p>',
+            '<p>快把我拖到聊天列表上</p>',
+            '<p>点击我可以暂停/恢复</p>',
         '</span>',
         '<img class="bot-home pauseico" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/pause.png" draggable="false" />',
     '</div>'].join(''));
