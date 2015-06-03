@@ -29,7 +29,6 @@ function sendmsg(ans) {
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
     _dubug("msg sent to: " + name);
-    $('#conv_filehelper').click();
 }
 
 function installbot(chats){
@@ -155,13 +154,15 @@ function chatbot() {
 
     //reply in current chat window
     typeof(observer) !== 'undefined' && observer.disconnect();
-    if ( $('.activeColumn:has(".bot.active")').length ) {
+    var activechat = $('.activeColumn:has(".bot.active")');
+    if ( $(activechat).length ) {
         observer = new MutationObserver(function(mutations) {
             var m = mutations.pop();
             if (m.nextSibling) {
                 var newnode = m.addedNodes[1];
-                var newmsg = $(newmsg).find('pre').text();
-                var name = $('.activeColumn:has(".bot.active")');
+                //if (newnode.className == 'chatItem me') return;
+                var newmsg = $(newnode).find('pre').text();
+                var name = $(activechat).find('.left.name').text();
                 _dubug("msg from: " + name);
                 if (newmsg) {
                     _dubug("msg content: " + newmsg);
@@ -189,6 +190,7 @@ function chatbot() {
             if (newmsg) {
                 _dubug("msg content: " + newmsg);
                 callBotAPI(newmsg,sendmsg);
+                $(activechat).click();
             } else {
                 _dubug("no msg found")
             }
