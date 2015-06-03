@@ -123,8 +123,8 @@ function botinit(){
             ':not([un="fmessage"])',
             ':not(".loadMoreConv")'].join(''))
         installbot(bots);
+        _dubug(bots.length.toString()+" bots initiated");
     });
-    _dubug(bots.length.toString()+" bot initiated");
 }
 
 function botstart(interval){
