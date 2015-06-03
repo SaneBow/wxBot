@@ -44,6 +44,7 @@ function installbot(chats){
     $(chats).children('.bot').click(function(e){
         e.stopPropagation();
         $(this).toggleClass('active');
+        typeof(observer) !== 'undefined' && observer.disconnect();
     });
 
     //add drag drop event to bot div
@@ -155,11 +156,20 @@ function chatbot() {
     //reply in current chat window
     typeof(observer) !== 'undefined' && observer.disconnect();
     if ( $('.activeColumn:has(".bot.active")').length ) {
-         observer = new MutationObserver(function(mutations) {
-         mutations.forEach(function(mutation) {
-            e = mutation.addedNodes;
-            console.log(e);
-         });
+        observer = new MutationObserver(function(mutations) {
+            var m = mutations.pop();
+            if (m.nextSibling) {
+                var newnode = m.addedNodes[1];
+                var newmsg = $(newmsg).find('pre').text();
+                var name = $('.activeColumn:has(".bot.active")');
+                _dubug("msg from: " + name);
+                if (newmsg) {
+                    _dubug("msg content: " + newmsg);
+                    callBotAPI(newmsg,sendmsg);
+                } else {
+                    _dubug("no msg found")
+                }
+            }
         });
         observer.observe($('#chat_chatmsglist')[0], { childList: true});
     }
@@ -170,7 +180,7 @@ function chatbot() {
     {
         is_active = $(this).parent().find(".bot").hasClass("active");
         if (!is_active) return;
-        name = $(this).parent().find(".left.name").text();
+        var name = $(this).parent().find(".left.name").text();
         _dubug("msg from: " + name);
         $(this).click();
         //Wait till chat box loaded
