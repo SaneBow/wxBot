@@ -38,19 +38,19 @@
 }
 
 span.tooltip {
-      position: absolute;
-      width: 128px;
-      height: 48px;
-      line-height: 48px;
-      padding: 0px 16px 0px 8px;
-      font-size: 18px;
-      text-align: center;
-      color: rgb(255, 255, 255);
-      background: rgb(96, 172, 57);
-      border: 0px 0px 0px 0px none none none none rgb(255, 255, 255) rgb(70, 126, 42) rgb(255, 255, 255) rgb(255, 255, 255);
-      border-radius: 5px 5px 5px 5px;
-      text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
-      box-shadow: rgb(85, 153, 51) -4px 0px 4px 0px inset;
+    position: absolute;
+    width: 244px;
+    height: 96px;
+    line-height: 36px;
+    padding: 16px 10px 0px 10px;
+    font-size: 21px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background: rgb(96, 172, 57);
+    border: 0px 0px 0px 0px none none none none rgb(255, 255, 255) rgb(70, 126, 42) rgb(255, 255, 255) rgb(255, 255, 255);
+    border-radius: 10px 10px 10px 10px;
+    text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
+    box-shadow: rgb(85, 153, 51) -4px 0px 4px 0px inset;
 }
 
 span.tooltip:after {
@@ -58,15 +58,15 @@ span.tooltip:after {
       position: absolute;
       width: 0;
       height: 0;
-      border-width: 15px;
+      border-width: 20px;
       border-style: solid;
       border-color: transparent #60AC39 transparent transparent;
-      top: 10px;
-      left: -30px;
+      top: 12px;
+      left: -40px;
 }
 
 #bot-wrapper span {
-    right:-150px;
+    right:-270px;
     top:-30px;
     opacity:0.8;
     display:none;
@@ -75,11 +75,11 @@ span.tooltip:after {
 
 @-webkit-keyframes blinker {
   from {opacity: 1.0;}
-  to {opacity: 0.0;}
+  to {opacity: 0.5;}
 }
 .blink{
 	-webkit-animation-name: blinker;
-	-webkit-animation-duration: 1.2s;
+	-webkit-animation-duration: 0.8s;
 	-webkit-animation-iteration-count:infinite;
 	-webkit-animation-timing-function:ease-in-out;
 	-webkit-animation-direction: alternate;
