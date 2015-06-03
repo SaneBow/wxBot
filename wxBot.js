@@ -154,15 +154,13 @@ function chatbot() {
 
     //reply in current chat window
     if ( $('.activeColumn:has(".bot.active")').length ) {
-        var insertedNodes = [];
         var observer = new MutationObserver(function(mutations) {
          mutations.forEach(function(mutation) {
            for (var i = 0; i < mutation.addedNodes.length; i++)
-             insertedNodes.push(mutation.addedNodes[i]);
-         })
+             console.log($(mutation.addedNodes[i]));
+         });
         });
-        observer.observe($('#chat_chatmsglist')[0], { childList: true, subtree: true });
-        console.log(insertedNodes);
+        observer.observe($('#chat_chatmsglist')[0], { childList: true, subtree: true});
     }
 
     //reply for red dotted item
