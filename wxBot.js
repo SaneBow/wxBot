@@ -160,6 +160,8 @@ function chatbot() {
          });
         });
         observer.observe($('#chat_chatmsglist')[0], { childList: true});
+        //dirty hack: disconnect every time bot runs
+        observer.disconnect();
     }
 
     //reply for red dotted item
