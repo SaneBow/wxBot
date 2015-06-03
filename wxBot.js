@@ -154,8 +154,8 @@ function chatbot() {
 
     //reply in current chat window
     typeof(observer) !== 'undefined' && observer.disconnect();
-    var activechat = $('.activeColumn:has(".bot.active")');
-    if ( $(activechat).length ) {
+    var activechat = $('.activeColumn');
+    if ( $('.activeColumn:has(".bot.active")').length ) {
         observer = new MutationObserver(function(mutations) {
             var m = mutations.pop();
             if (m.nextSibling) {
