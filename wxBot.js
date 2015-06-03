@@ -144,9 +144,17 @@ function botupdate(){
     uninstalled.length && installbot(uninstalled);
 }
 
-function chatbot() {
-    botupdate();
+function setupdater() {
+    observer = new MutationObserver(function(mutations) {
+        var m = mutations.pop();
+        var newchatter = m.addedNodes[1];
+        if (newchatter.className !== 'chatListColumn') return;
+        botupdate();
+    });
+    observer.observe($('#conversationContainer')[0], { childList: true});
+}
 
+function chatbot() {
     //if paused
     if ( $('.bot-home').hasClass('paused') ) return;
     //if no bot-took-overed
@@ -182,18 +190,21 @@ function chatbot() {
         if (!is_active) return;
         var name = $(this).parent().find(".left.name").text();
         _dubug("msg from: " + name);
-        $(this).click();
-        //Wait till chat box loaded
-        setTimeout(function(){
-            newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
-            if (newmsg) {
-                _dubug("msg content: " + newmsg);
-                callBotAPI(newmsg,sendmsg);
-            } else {
-                _dubug("no msg found")
-            }
-            $(activechat).click();
-        },50);
+
+        $(this).click(function(){
+            //Wait till chat box loaded
+            setTimeout(function(){
+                newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
+                if (newmsg) {
+                    _dubug("msg content: " + newmsg);
+                    callBotAPI(newmsg,sendmsg);
+                } else {
+                    _dubug("no msg found")
+                }
+                $(activechat).click();
+            },50);
+        });
+
     });
 }
 
