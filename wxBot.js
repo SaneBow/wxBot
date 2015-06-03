@@ -159,7 +159,9 @@ function chatbot() {
             e = mutation.addNodes;
             console.log(e);
             //dirty hack: disconnect every time bot runs
-            if (mutation.addNodes !== undefined && mutation.addedNodes[1].className == 'chatItem you'){
+            if (mutation.addedNodes !== undefined && 
+                mutation.addedNodes.length == 3 &&
+                mutation.addedNodes[1].className == 'chatItem you'){
                 observer.disconnect();
             }
          });
