@@ -156,9 +156,10 @@ function chatbot() {
     if ( $('.activeColumn:has(".bot.active")').length ) {
         var observer = new MutationObserver(function(mutations) {
          mutations.forEach(function(mutation) {
-            console.log(mutation.addedNodes);
+            e = mutation.addNodes;
+            console.log(e);
             //dirty hack: disconnect every time bot runs
-            if (mutation.addedNodes[1].className = 'chatItem you'){
+            if (mutation.addNodes.length && mutation.addedNodes[1].className == 'chatItem you'){
                 observer.disconnect();
             }
          });
