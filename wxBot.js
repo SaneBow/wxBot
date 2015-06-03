@@ -147,13 +147,14 @@ function botupdate(){
 }
 
 function setupdater() {
-    observer = new MutationObserver(function(mutations) {
+    var updater = new MutationObserver(function(mutations) {
+        console.log(mutations);
         var m = mutations.pop();
         var newchatter = m.addedNodes[1];
         if (newchatter.className !== 'chatListColumn') return;
         botupdate();
     });
-    observer.observe($('#conversationContainer')[0], { childList: true});
+    var updater.observe($('#conversationContainer')[0], { childList: true});
 }
 
 function chatbot() {
