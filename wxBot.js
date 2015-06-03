@@ -133,7 +133,7 @@ function botupdate(){
             ':not([un="newsapp"])',
             ':not([un="filehelper"])',
             ':not(".loadMoreConv")',
-            ':not(has:(".bot"))'].join(''));
+            ':not(:has(".bot"))'].join(''));
     uninstalled.length && installbot(uninstalled);
     debug(uninstalled.length.toString()+" nodes to update");
 }
