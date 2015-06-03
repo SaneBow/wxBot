@@ -123,6 +123,8 @@ function botinit(){
             ':not([un="fmessage"])',
             ':not(".loadMoreConv")'].join(''))
         installbot(bots);
+        //set chat list update listener
+        setupdater();
         _dubug(bots.length.toString()+" bots initiated");
     });
 }
