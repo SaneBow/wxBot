@@ -128,6 +128,7 @@ function botinit(){
 }
 
 function botstart(interval){
+    interval = typeof interval !== 'undefined' ? interval : 30;
     setInterval(chatbot,interval*1000);
     _dubug("started with interval: "+interval.toString()+"s");
 }
@@ -140,7 +141,7 @@ function botupdate(){
             ':not(".loadMoreConv")',
             ':not(:has(".bot"))'].join(''));
     uninstalled.length && installbot(uninstalled);
-    _dubug(uninstalled.length.toString()+" nodes to update");
+    uninstalled.length && _dubug(uninstalled.length.toString()+" nodes to update");
 }
 
 function chatbot() {
@@ -173,5 +174,5 @@ function chatbot() {
 
 DEBUG = true;
 botinit();
-botstart(30);
+botstart(runtimeGlobal.interval);
 botupdate();
