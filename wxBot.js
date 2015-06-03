@@ -148,10 +148,6 @@ function botupdate(){
 
 function setupdater() {
     updater = new MutationObserver(function(mutations) {
-        console.log(mutations);
-        var m = mutations.pop();
-        var newchatter = m.addedNodes[1];
-        if (newchatter.className !== 'chatListColumn') return;
         botupdate();
     });
     updater.observe($('#conversationContainer')[0], { childList: true});
