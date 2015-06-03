@@ -146,12 +146,27 @@ function botupdate(){
 
 function chatbot() {
     botupdate();
+    
     //if paused
     if ( $('.bot-home').hasClass('paused') ) return;
     //if no bot-took-overed
     if ( $('.bot.active').length == 0 )  return;
 
-    $('#conv_filehelper').click();
+    //reply in current chat window
+    if ( $('.activeColumn:has(".bot.active")').length ) {
+        var insertedNodes = [];
+        var observer = new MutationObserver(function(mutations) {
+         mutations.forEach(function(mutation) {
+           for (var i = 0; i < mutation.addedNodes.length; i++)
+             insertedNodes.push(mutation.addedNodes[i]);
+         })
+        });
+        observer.observe($('#chat_chatmsglist')[0], { childList: true, subtree: true });
+        console.log(insertedNodes);
+    }
+
+    //reply for red dotted item
+    //$('#conv_filehelper').click();
     $('.unreadDot:visible,.unreadDotS:visible').each(function()
     {
         is_active = $(this).parent().find(".bot").hasClass("active");
