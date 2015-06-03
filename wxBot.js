@@ -123,9 +123,9 @@ function botinit(){
             ':not([un="fmessage"])',
             ':not(".loadMoreConv")'].join(''))
         installbot(bots);
+        _dubug(bots.length.toString()+" bots initiated");
         //set chat list update listener
         setupdater();
-        _dubug(bots.length.toString()+" bots initiated");
     });
 }
 
@@ -147,14 +147,15 @@ function botupdate(){
 }
 
 function setupdater() {
-    var updater = new MutationObserver(function(mutations) {
+    updater = new MutationObserver(function(mutations) {
         console.log(mutations);
         var m = mutations.pop();
         var newchatter = m.addedNodes[1];
         if (newchatter.className !== 'chatListColumn') return;
         botupdate();
     });
-    var updater.observe($('#conversationContainer')[0], { childList: true});
+    updater.observe($('#conversationContainer')[0], { childList: true});
+    _debug('updater set');
 }
 
 function chatbot() {
