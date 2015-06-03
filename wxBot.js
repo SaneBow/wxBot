@@ -156,13 +156,13 @@ function chatbot() {
     if ( $('.activeColumn:has(".bot.active")').length ) {
         var observer = new MutationObserver(function(mutations) {
          mutations.forEach(function(mutation) {
-            e = mutation.addNodes;
+            e = mutation.addedNodes;
             console.log(e);
             //dirty hack: disconnect every time bot runs
-            if (mutation.addedNodes !== undefined &&
-                mutation.addedNodes.length == 3 &&
-                mutation.addedNodes[1].className == 'chatItem you'){
-                //erver.disconnect();
+            if (e !== undefined &&
+                e.length == 3 &&
+                e[1].className == 'chatItem you'){
+                oberver.disconnect();
             }
          });
         });
