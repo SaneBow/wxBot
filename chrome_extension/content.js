@@ -29,8 +29,13 @@ function waitForElementToDisplay(selector, time) {
 
 waitForElementToDisplay('#accountAvatarWrapper',1000);
 
-//set up a messager to fetch settings
 var runtimeGlobal = {};
-chrome.runtime.sendMessage({action: "getSettings"}, function(response) {
-    runtimeGlobal.interval = response.interval;
+//set up a messager to fetch settings
+//chrome.runtime.sendMessage({action: "getSettings"}, function(response) {
+//   runtimeGlobal.interval = response.interval;
+//});
+
+chrome.storage.sync.get('botSleepInterval',function(items){
+    runtimeGlobal.interval = items.botSleepInterval;
 });
+

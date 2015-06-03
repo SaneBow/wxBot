@@ -140,8 +140,8 @@ function botupdate(){
             ':not([un="fmessage"])',
             ':not(".loadMoreConv")',
             ':not(:has(".bot"))'].join(''));
-    uninstalled.length && installbot(uninstalled);
     uninstalled.length && _dubug(uninstalled.length.toString()+" nodes to update");
+    uninstalled.length && installbot(uninstalled);
 }
 
 function chatbot() {
