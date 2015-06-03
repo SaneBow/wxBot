@@ -79,7 +79,7 @@ function buildbothome() {
     '</div>'].join(''));
 
     //show tooltip for 10s
-    setTimeout(function{
+    setTimeout(function(){
         $('img.botico').on('load',function(){
             $('#bot-wrapper span').show();
             setTimeout(function(){
