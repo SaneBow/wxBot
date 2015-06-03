@@ -73,18 +73,20 @@ function buildbothome() {
         '<img class="bot-home botico" title="wxBot - a WeChat chat bot" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax1.png" draggable="true" />',
         '<span class="tooltip blink">',
             '<p>快把我拖到聊天列表上</p>',
-            '<p>点击我可以暂停/恢复</p>',
+            '<p>点击我可以 暂停/恢复</p>',
         '</span>',
         '<img class="bot-home pauseico" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/pause.png" draggable="false" />',
     '</div>'].join(''));
 
     //show tooltip for 10s
-    $('img.botico').on('load',function(){
-        $('#bot-wrapper span').show();
-        setTimeout(function(){
-            $('#bot-wrapper span').hide();
-        },10*1000);
-    });
+    setTimeout(function{
+        $('img.botico').on('load',function(){
+            $('#bot-wrapper span').show();
+            setTimeout(function(){
+                $('#bot-wrapper span').hide();
+            },10*1000);
+        });
+    },500);
 
     //clear tooltip on mousedown
     $('.bot-home').mousedown(function(){
