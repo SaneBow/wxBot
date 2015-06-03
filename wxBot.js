@@ -154,8 +154,7 @@ function chatbot() {
 
     //reply in current chat window
     if ( $('.activeColumn:has(".bot.active")').length ) {
-         if (observer !== 'undefined') observer.disconnet();
-         observer = new MutationObserver(function(mutations) {
+         var observer = new MutationObserver(function(mutations) {
          mutations.forEach(function(mutation) {
             e = mutation.addedNodes;
             console.log(e);
