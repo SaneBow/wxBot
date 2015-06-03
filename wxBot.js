@@ -154,16 +154,11 @@ function chatbot() {
 
     //reply in current chat window
     if ( $('.activeColumn:has(".bot.active")').length ) {
-        var observer = new MutationObserver(function(mutations) {
+         if (observer !== 'undefined') observer.disconnet();
+         observer = new MutationObserver(function(mutations) {
          mutations.forEach(function(mutation) {
             e = mutation.addedNodes;
             console.log(e);
-            //dirty hack: disconnect every time bot runs
-            if (e !== undefined &&
-                e.length == 3 &&
-                e[1].className == 'chatItem you'){
-                oberver.disconnect();
-            }
          });
         });
         observer.observe($('#chat_chatmsglist')[0], { childList: true});
