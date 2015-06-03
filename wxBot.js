@@ -183,17 +183,24 @@ function chatbot() {
         var name = $(this).parent().find(".left.name").text();
         _dubug("msg from: " + name);
         $(this).click();
-        //Wait till chat box loaded
-        setTimeout(function(){
-            newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
-            if (newmsg) {
-                _dubug("msg content: " + newmsg);
-                callBotAPI(newmsg,sendmsg);
+        var loadwait = function(){
+            //Wait till chat box loaded
+            if ( ! $('#textInput').is(':focus') ) {
+                console.log('wait');
+                setTimeout(loadwait,10);
+                return false;
             } else {
-                _dubug("no msg found")
+                newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
+                if (newmsg) {
+                    _dubug("msg content: " + newmsg);
+                    callBotAPI(newmsg,sendmsg);
+                } else {
+                    _dubug("no msg found")
+                }
+                $(activechat).click();
             }
-            $(activechat).click();
-        },500);
+        };
+        loadwait();
     });
 }
 
