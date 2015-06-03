@@ -1,4 +1,4 @@
-function _dubug(msg){
+function _debug(msg){
     DEBUG && console.log(msg);
 }
 
@@ -19,16 +19,16 @@ function callBotAPI(newmsg,callback) {
             callback(ans);
         },
         'error': function() {
-            _dubug("ajax error occured");
+            _debug("ajax error occured");
         }
     });
 }
 
 function sendmsg(ans) {
-    _dubug("bot resp with: " + ans);
+    _debug("bot resp with: " + ans);
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
-    _dubug("msg sent to: " + name);
+    _debug("msg sent to: " + name);
 }
 
 function installbot(chats){
@@ -63,7 +63,7 @@ function installbot(chats){
         },
     });
 
-    _dubug("installed "+chats.length.toString()+" bots");
+    _debug("installed "+chats.length.toString()+" bots");
 }
 
 function buildbothome() {
@@ -109,7 +109,7 @@ function buildbothome() {
             $('.chatListColumn').removeClass('over');
         },
     });
-    _dubug("bot home constructed");
+    _debug("bot home constructed");
 }
 
 function botinit(){
@@ -123,7 +123,7 @@ function botinit(){
             ':not([un="fmessage"])',
             ':not(".loadMoreConv")'].join(''))
         installbot(bots);
-        _dubug(bots.length.toString()+" bots initiated");
+        _debug(bots.length.toString()+" bots initiated");
         //set chat list update listener
         setupdater();
     });
@@ -132,7 +132,7 @@ function botinit(){
 function botstart(interval){
     interval = typeof interval !== 'undefined' ? interval : 30;
     setInterval(chatbot,interval*1000);
-    _dubug("started with interval: "+interval.toString()+"s");
+    _debug("started with interval: "+interval.toString()+"s");
 }
 
 function botupdate(){
@@ -142,7 +142,7 @@ function botupdate(){
             ':not([un="fmessage"])',
             ':not(".loadMoreConv")',
             ':not(:has(".bot"))'].join(''));
-    uninstalled.length && _dubug(uninstalled.length.toString()+" nodes to update");
+    uninstalled.length && _debug(uninstalled.length.toString()+" nodes to update");
     uninstalled.length && installbot(uninstalled);
 }
 
@@ -175,12 +175,12 @@ function chatbot() {
                 if (newnode.className == 'chatItem me') return;
                 var newmsg = $(newnode).find('pre').text();
                 var name = $(activechat).find('.left.name').text();
-                _dubug("msg from: " + name);
+                _debug("msg from: " + name);
                 if (newmsg) {
-                    _dubug("msg content: " + newmsg);
+                    _debug("msg content: " + newmsg);
                     callBotAPI(newmsg,sendmsg);
                 } else {
-                    _dubug("no msg found")
+                    _debug("no msg found")
                 }
             }
         });
@@ -193,17 +193,17 @@ function chatbot() {
         is_active = $(this).parent().find(".bot").hasClass("active");
         if (!is_active) return;
         var name = $(this).parent().find(".left.name").text();
-        _dubug("msg from: " + name);
+        _debug("msg from: " + name);
 
         $(this).click(function(){
             //Wait till chat box loaded
             setTimeout(function(){
                 newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
                 if (newmsg) {
-                    _dubug("msg content: " + newmsg);
+                    _debug("msg content: " + newmsg);
                     callBotAPI(newmsg,sendmsg);
                 } else {
-                    _dubug("no msg found")
+                    _debug("no msg found")
                 }
                 $(activechat).click();
             },50);
