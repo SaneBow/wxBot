@@ -153,12 +153,12 @@ function chatbot() {
     if ( $('.bot.active').length == 0 )  return;
 
     //reply in current chat window
+    typeof(observer) !== 'undefined' && observer.disconnect();
     if ( $('.activeColumn:has(".bot.active")').length ) {
-         var observer = new MutationObserver(function(mutations) {
+         observer = new MutationObserver(function(mutations) {
          mutations.forEach(function(mutation) {
             e = mutation.addedNodes;
             console.log(e);
-            observer.disconnect();
          });
         });
         observer.observe($('#chat_chatmsglist')[0], { childList: true});
