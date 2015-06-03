@@ -146,7 +146,7 @@ function botupdate(){
 
 function chatbot() {
     botupdate();
-    
+
     //if paused
     if ( $('.bot-home').hasClass('paused') ) return;
     //if no bot-took-overed
@@ -156,12 +156,12 @@ function chatbot() {
     if ( $('.activeColumn:has(".bot.active")').length ) {
         var observer = new MutationObserver(function(mutations) {
          mutations.forEach(function(mutation) {
-             console.log(mutation.addedNodes);
+            console.log(mutation.addedNodes);
+            //dirty hack: disconnect every time bot runs
+            observer.disconnect();
          });
         });
         observer.observe($('#chat_chatmsglist')[0], { childList: true});
-        //dirty hack: disconnect every time bot runs
-        observer.disconnect();
     }
 
     //reply for red dotted item
