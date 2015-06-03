@@ -158,7 +158,9 @@ function chatbot() {
          mutations.forEach(function(mutation) {
             console.log(mutation.addedNodes);
             //dirty hack: disconnect every time bot runs
-            observer.disconnect();
+            if (mutation.addedNodes[1].className = 'chatItem you'){
+                observer.disconnect();
+            }
          });
         });
         observer.observe($('#chat_chatmsglist')[0], { childList: true});
