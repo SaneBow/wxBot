@@ -14,5 +14,17 @@ function loadjscssfile(filename, filetype){
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
 
-loadjscssfile('https://rawgit.com/SaneBow/wxBot/master/wxBot.css','css');
-loadjscssfile('https://rawgit.com/SaneBow/wxBot/master/wxBot.js','js');
+function waitForElementToDisplay(selector, time) {
+    if(document.querySelector(selector)!=null) {
+        loadjscssfile('https://rawgit.com/SaneBow/wxBot/master/wxBot.css','css');
+        loadjscssfile('https://rawgit.com/SaneBow/wxBot/master/wxBot.js','js');
+        return;
+    }
+    else {
+        setTimeout(function() {
+            waitForElementToDisplay(selector);
+        }, time);
+    }
+}
+
+waitForElementToDisplay('#accountAvatarWrapper',1000);

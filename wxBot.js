@@ -1,4 +1,4 @@
-function debug(msg){
+function _dubug(msg){
     DEBUG && console.log(msg);
 }
 
@@ -19,16 +19,16 @@ function callBotAPI(newmsg,callback) {
             callback(ans);
         },
         'error': function() {
-            debug("ajax error occured");
+            _dubug("ajax error occured");
         }
     });
 }
 
 function sendmsg(ans) {
-    debug("bot resp with: " + ans);
+    _dubug("bot resp with: " + ans);
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
-    debug("msg sent to: " + name);
+    _dubug("msg sent to: " + name);
     $('#conv_filehelper').click();
 }
 
@@ -63,7 +63,7 @@ function installbot(chats){
         },
     });
 
-    debug("installed "+chats.length.toString()+" bots");
+    _dubug("installed "+chats.length.toString()+" bots");
 }
 
 function buildbothome() {
@@ -79,10 +79,12 @@ function buildbothome() {
     '</div>'].join(''));
 
     //show tooltip for 10s
-    $('#bot-wrapper span').show();
-    setTimeout(function(){
-        $('#bot-wrapper span').hide();
-    },10*1000);
+    $('img.botico').on('load',function(){
+        $('#bot-wrapper span').show();
+        setTimeout(function(){
+            $('#bot-wrapper span').hide();
+        },10*1000);
+    });
 
     //clear tooltip on mousedown
     $('.bot-home').mousedown(function(){
@@ -107,7 +109,7 @@ function buildbothome() {
             $('.chatListColumn').removeClass('over');
         },
     });
-    debug("bot home constructed");
+    _dubug("bot home constructed");
 }
 
 function botinit(){
@@ -115,17 +117,18 @@ function botinit(){
         //init bot-home
         buildbothome();
         //init bot divs
-        installbot($(['.chatListColumn',
+        var bots = $(['.chatListColumn',
             ':not([un="newsapp"])',
             ':not([un="filehelper"])',
-            ':not(".loadMoreConv")'].join('')));
+            ':not(".loadMoreConv")'].join(''))
+        installbot(bots);
     });
-    debug("bot initiated");
+    _dubug(bots.length.toString()+" bot initiated");
 }
 
 function botstart(interval){
     setInterval(chatbot,interval*1000);
-    debug("started with interval: "+interval.toString()+"s");
+    _dubug("started with interval: "+interval.toString()+"s");
 }
 
 function botupdate(){
@@ -135,7 +138,7 @@ function botupdate(){
             ':not(".loadMoreConv")',
             ':not(:has(".bot"))'].join(''));
     uninstalled.length && installbot(uninstalled);
-    debug(uninstalled.length.toString()+" nodes to update");
+    _dubug(uninstalled.length.toString()+" nodes to update");
 }
 
 function chatbot() {
@@ -151,16 +154,16 @@ function chatbot() {
         is_active = $(this).parent().find(".bot").hasClass("active");
         if (!is_active) return;
         name = $(this).parent().find(".left.name").text();
-        debug("msg from: " + name);
+        _dubug("msg from: " + name);
         $(this).click();
         //Wait till chat box loaded
         setTimeout(function(){
             newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
             if (newmsg) {
-                debug("msg content: " + newmsg);
+                _dubug("msg content: " + newmsg);
                 callBotAPI(newmsg,sendmsg);
             } else {
-                debug("no msg found")
+                _dubug("no msg found")
             }
         },500);
     });
