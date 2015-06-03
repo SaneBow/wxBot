@@ -120,6 +120,7 @@ function botinit(){
         var bots = $(['.chatListColumn',
             ':not([un="newsapp"])',
             ':not([un="filehelper"])',
+            ':not([un="fmessage"])',
             ':not(".loadMoreConv")'].join(''))
         installbot(bots);
     });
@@ -135,6 +136,7 @@ function botupdate(){
     uninstalled = $(['.chatListColumn',
             ':not([un="newsapp"])',
             ':not([un="filehelper"])',
+            ':not([un="fmessage"])',
             ':not(".loadMoreConv")',
             ':not(:has(".bot"))'].join(''));
     uninstalled.length && installbot(uninstalled);
