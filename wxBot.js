@@ -160,7 +160,7 @@ function chatbot() {
             var m = mutations.pop();
             if (m.nextSibling) {
                 var newnode = m.addedNodes[1];
-                //if (newnode.className == 'chatItem me') return;
+                if (newnode.className == 'chatItem me') return;
                 var newmsg = $(newnode).find('pre').text();
                 var name = $(activechat).find('.left.name').text();
                 _dubug("msg from: " + name);
@@ -176,7 +176,6 @@ function chatbot() {
     }
 
     //reply for red dotted item
-    //$('#conv_filehelper').click();
     $('.unreadDot:visible,.unreadDotS:visible').each(function()
     {
         is_active = $(this).parent().find(".bot").hasClass("active");
@@ -190,10 +189,10 @@ function chatbot() {
             if (newmsg) {
                 _dubug("msg content: " + newmsg);
                 callBotAPI(newmsg,sendmsg);
-                $(activechat).click();
             } else {
                 _dubug("no msg found")
             }
+            $(activechat).click();
         },500);
     });
 }
