@@ -159,6 +159,7 @@ function chatbot() {
          mutations.forEach(function(mutation) {
             e = mutation.addedNodes;
             console.log(e);
+            observer.disconnect();
          });
         });
         observer.observe($('#chat_chatmsglist')[0], { childList: true});
