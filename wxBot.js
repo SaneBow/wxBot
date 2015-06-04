@@ -165,9 +165,9 @@ function chatbot() {
     //reply in current chat window
     typeof(observer) !== 'undefined' && observer.disconnect();
     if ( $('.activeColumn:has(".bot.active")').length ) {
-        var target = $('.activeColumn .desc');
+        var target = $('.activeColumn .descWrapper');
         observer = new MutationObserver(function(mutations) {
-            var newmsg = target.text();
+            var newmsg = target.find('.desc').text();
             if ($('#chat_chatmsglist').children().last().hasClass('chatItem you')) {
                 var name = $(activechat).find('.left.name').text();
                 _debug("msg from: " + name);
