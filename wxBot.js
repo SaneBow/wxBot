@@ -165,23 +165,25 @@ function chatbot() {
     //reply in current chat window
     typeof(observer) !== 'undefined' && observer.disconnect();
     if ( $('.activeColumn:has(".bot.active")').length ) {
+        var target = $('.activeColumn .desc');
         observer = new MutationObserver(function(mutations) {
-            var m = mutations.pop();
-            console.log(m);
-            var newnode = m.addedNodes[1];
-            if (newnode.className == 'chatItem you') {
-                var newmsg = $(newnode).find('pre').text();
-                var name = $(activechat).find('.left.name').text();
-                _debug("msg from: " + name);
-                if (newmsg) {
-                    _debug("msg content: " + newmsg);
-                    callBotAPI(newmsg,sendmsg,activechat);
-                } else {
-                    _debug("no msg found");
-                }
-            }
+            //var m = mutations.pop();
+            //console.log(m);
+            //var newnode = m.addedNodes[1];
+            //if (newnode.className == 'chatItem you') {
+            //    var newmsg = $(newnode).find('pre').text();
+            //    var name = $(activechat).find('.left.name').text();
+            //    _debug("msg from: " + name);
+            //    if (newmsg) {
+            //        _debug("msg content: " + newmsg);
+            //        callBotAPI(newmsg,sendmsg,activechat);
+            //    } else {
+            //        _debug("no msg found");
+            //    }
+            //}
+            console.log(target.text());
         });
-        observer.observe($('#chat_chatmsglist')[0], { childList: true});
+        observer.observe(target[0], { childList: true});
     }
 
     //reply for red dotted item
