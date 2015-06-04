@@ -194,8 +194,7 @@ function chatbot() {
         var name = $(this).parent().find(".left.name").text();
         _debug("msg from: " + name);
 
-        $(this).parent().click(function(e){
-            e.stopPropagation();
+        $(this).parent().click(function(){
             //Wait till chat box loaded
             setTimeout(function(){
                 newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
