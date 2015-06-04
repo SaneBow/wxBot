@@ -160,9 +160,11 @@ function chatbot() {
     //if no bot-took-overed
     if ( $('.bot.active').length == 0 )  return;
 
+    //record current chat
+    var activechat = $('.activeColumn');
+
     //reply in current chat window
     typeof(observer) !== 'undefined' && observer.disconnect();
-    var activechat = $('.activeColumn');
     if ( $('.activeColumn:has(".bot.active")').length ) {
         observer = new MutationObserver(function(mutations) {
             _debug('current chat observer triggered');
@@ -192,8 +194,8 @@ function chatbot() {
         var name = $(this).parent().find(".left.name").text();
         _debug("msg from: " + name);
 
-        $(this).click();
-        (function(){
+        $(this).click(function(e){
+            e.stopPropagation();
             //Wait till chat box loaded
             setTimeout(function(){
                 newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
@@ -204,9 +206,8 @@ function chatbot() {
                     _debug("no msg found");
                 }
                 $(activechat).click();
-            },50);
-        })();
-
+            },100);
+        };);
     });
 }
 
