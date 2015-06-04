@@ -3,7 +3,7 @@ function _debug(msg){
 }
 
 function callBotAPI(newmsg,callback,activechat) {
-   //YQL for cross region json ajax
+    //YQL for cross region json ajax
     var yql_url = 'https://query.yahooapis.com/v1/public/yql';
     var url = 'http://www.tuling123.com/openapi/api?key=abab9d3783d6e367e71e56c721e3165a&info='+encodeURIComponent(newmsg);
     $.ajax({
@@ -207,6 +207,7 @@ function chatbot() {
 }
 
 DEBUG = true;
+VERSION = 2.0.0;
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
