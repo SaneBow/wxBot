@@ -142,7 +142,6 @@ function botupdate(){
             ':not([un="fmessage"])',
             ':not(".loadMoreConv")',
             ':not(:has(".bot"))'].join(''));
-    uninstalled.length && _debug(uninstalled.length.toString()+" nodes to update");
     uninstalled.length && installbot(uninstalled);
 }
 
@@ -167,11 +166,10 @@ function chatbot() {
     typeof(observer) !== 'undefined' && observer.disconnect();
     if ( $('.activeColumn:has(".bot.active")').length ) {
         observer = new MutationObserver(function(mutations) {
-            _debug('current chat observer triggered');
             var m = mutations.pop();
-            if (m.nextSibling) {
-                var newnode = m.addedNodes[1];
-                if (newnode.className == 'chatItem me') return;
+            console.log(m);
+            var newnode = m.addedNodes[1];
+            if (newnode.className == 'chatItem you') {
                 var newmsg = $(newnode).find('pre').text();
                 var name = $(activechat).find('.left.name').text();
                 _debug("msg from: " + name);
@@ -187,26 +185,25 @@ function chatbot() {
     }
 
     //reply for red dotted item
-    $('chatListColumn .unreadDot:visible, chatListColumn .unreadDotS:visible').each(function()
+    $('.unreadDot:visible, .unreadDotS:visible').each(function()
     {
         is_active = $(this).parent().find(".bot").hasClass("active");
         if (!is_active) return;
         var name = $(this).parent().find(".left.name").text();
         _debug("msg from: " + name);
 
-        $(this).parent().click(function(){
-            //Wait till chat box loaded
-            setTimeout(function(){
-                newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
-                if (newmsg) {
-                    _debug("msg content: " + newmsg);
-                    callBotAPI(newmsg,sendmsg);
-                } else {
-                    _debug("no msg found");
-                }
-                $(activechat).click();
-            },500);
-        });
+        $(this).parent().click();
+        //Wait till chat box loaded
+        setTimeout(function(){
+            newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
+            if (newmsg) {
+                _debug("msg content: " + newmsg);
+                callBotAPI(newmsg,sendmsg);
+            } else {
+                _debug("no msg found");
+            }
+            $(activechat).click();
+        },500);
     });
 }
 
