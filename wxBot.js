@@ -168,7 +168,7 @@ function chatbot() {
         var target = $('.activeColumn .desc');
         observer = new MutationObserver(function(mutations) {
             var newmsg = target.text();
-            if ($('#chat_chatmsglist').children().last().hasClass('chatItem me')) {
+            if ($('#chat_chatmsglist').children().last().hasClass('chatItem you')) {
                 var name = $(activechat).find('.left.name').text();
                 _debug("msg from: " + name);
                 if (newmsg) {
