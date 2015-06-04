@@ -167,23 +167,19 @@ function chatbot() {
     if ( $('.activeColumn:has(".bot.active")').length ) {
         var target = $('.activeColumn .desc');
         observer = new MutationObserver(function(mutations) {
-            //var m = mutations.pop();
-            //console.log(m);
-            //var newnode = m.addedNodes[1];
-            //if (newnode.className == 'chatItem you') {
-            //    var newmsg = $(newnode).find('pre').text();
-            //    var name = $(activechat).find('.left.name').text();
-            //    _debug("msg from: " + name);
-            //    if (newmsg) {
-            //        _debug("msg content: " + newmsg);
-            //        callBotAPI(newmsg,sendmsg,activechat);
-            //    } else {
-            //        _debug("no msg found");
-            //    }
-            //}
-            console.log(target.text());
+            var newmsg = target.text();
+            if ($('#chat_chatmsglist').children().last().hasClass('chatItem me')) {
+                var name = $(activechat).find('.left.name').text();
+                _debug("msg from: " + name);
+                if (newmsg) {
+                    _debug("msg content: " + newmsg);
+                    callBotAPI(newmsg,sendmsg,activechat);
+                } else {
+                    _debug("no msg found");
+                }
+            }
         });
-        observer.observe(target[0], { childList: true});
+        observer.observe(target[0], {childList: true});
     }
 
     //reply for red dotted item
