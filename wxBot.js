@@ -206,8 +206,8 @@ function chatbot() {
                     _debug("no msg found");
                 }
                 $(activechat).click();
-            },100);
-        };);
+            },500);
+        });
     });
 }
 
