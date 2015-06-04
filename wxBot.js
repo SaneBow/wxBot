@@ -207,7 +207,7 @@ function chatbot() {
 }
 
 DEBUG = true;
-VERSION = 2.0.0;
+VERSION = "2.0";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
