@@ -187,14 +187,14 @@ function chatbot() {
     }
 
     //reply for red dotted item
-    $('.unreadDot:visible,.unreadDotS:visible').each(function()
+    $('chatListColumn .unreadDot:visible, chatListColumn .unreadDotS:visible').each(function()
     {
         is_active = $(this).parent().find(".bot").hasClass("active");
         if (!is_active) return;
         var name = $(this).parent().find(".left.name").text();
         _debug("msg from: " + name);
 
-        $(this).click(function(e){
+        $(this).parent().click(function(e){
             e.stopPropagation();
             //Wait till chat box loaded
             setTimeout(function(){
