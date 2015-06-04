@@ -192,7 +192,8 @@ function chatbot() {
         var name = $(this).parent().find(".left.name").text();
         _debug("msg from: " + name);
 
-        $(this).click(function(){
+        $(this).click();
+        (function(){
             //Wait till chat box loaded
             setTimeout(function(){
                 newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
@@ -203,8 +204,8 @@ function chatbot() {
                     _debug("no msg found");
                 }
                 $(activechat).click();
-            },500);
-        });
+            },50);
+        })();
 
     });
 }
