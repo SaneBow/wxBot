@@ -165,6 +165,7 @@ function chatbot() {
     var activechat = $('.activeColumn');
     if ( $('.activeColumn:has(".bot.active")').length ) {
         observer = new MutationObserver(function(mutations) {
+            _debug('current chat observer triggered');
             var m = mutations.pop();
             if (m.nextSibling) {
                 var newnode = m.addedNodes[1];
@@ -176,7 +177,7 @@ function chatbot() {
                     _debug("msg content: " + newmsg);
                     callBotAPI(newmsg,sendmsg);
                 } else {
-                    _debug("no msg found")
+                    _debug("no msg found");
                 }
             }
         });
@@ -199,7 +200,7 @@ function chatbot() {
                     _debug("msg content: " + newmsg);
                     callBotAPI(newmsg,sendmsg);
                 } else {
-                    _debug("no msg found")
+                    _debug("no msg found");
                 }
                 $(activechat).click();
             },50);
