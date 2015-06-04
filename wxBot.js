@@ -2,7 +2,7 @@ function _debug(msg){
     DEBUG && console.log(msg);
 }
 
-function callBotAPI(newmsg,callback) {
+function callBotAPI(newmsg,callback,activechat) {
    //YQL for cross region json ajax
     var yql_url = 'https://query.yahooapis.com/v1/public/yql';
     var url = 'http://www.tuling123.com/openapi/api?key=abab9d3783d6e367e71e56c721e3165a&info='+encodeURIComponent(newmsg);
@@ -16,7 +16,7 @@ function callBotAPI(newmsg,callback) {
         'dataType': 'jsonp',
         'success': function(response) {
             ans = response.query.results.json.text;
-            callback(ans,arguments[1]);
+            callback(ans,activechat);
         },
         'error': function() {
             _debug("ajax error occured");
@@ -24,12 +24,11 @@ function callBotAPI(newmsg,callback) {
     });
 }
 
-function sendmsg(ans,name) {
+function sendmsg(ans,jumpback){
     _debug("bot resp with: " + ans);
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
-    _debug("msg sent to: " + name);
-    $(activechat).click();
+    $(jumpback).click();
 }
 
 function installbot(chats){
@@ -161,7 +160,7 @@ function chatbot() {
     if ( $('.bot.active').length == 0 )  return;
 
     //record current chat
-    activechat = $('.activeColumn');
+    var activechat = $('.activeColumn');
 
     //reply in current chat window
     typeof(observer) !== 'undefined' && observer.disconnect();
@@ -176,7 +175,7 @@ function chatbot() {
                 _debug("msg from: " + name);
                 if (newmsg) {
                     _debug("msg content: " + newmsg);
-                    callBotAPI(newmsg,sendmsg,name);
+                    callBotAPI(newmsg,sendmsg,activechat);
                 } else {
                     _debug("no msg found");
                 }
@@ -199,7 +198,7 @@ function chatbot() {
             newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
             if (newmsg) {
                 _debug("msg content: " + newmsg);
-                callBotAPI(newmsg,sendmsg,name);
+                callBotAPI(newmsg,sendmsg,activechat);
             } else {
                 _debug("no msg found");
             }
