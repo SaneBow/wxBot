@@ -16,7 +16,7 @@ function callBotAPI(newmsg,callback) {
         'dataType': 'jsonp',
         'success': function(response) {
             ans = response.query.results.json.text;
-            callback(ans);
+            callback(ans,arguments[1]);
         },
         'error': function() {
             _debug("ajax error occured");
@@ -24,11 +24,12 @@ function callBotAPI(newmsg,callback) {
     });
 }
 
-function sendmsg(ans) {
+function sendmsg(ans,name) {
     _debug("bot resp with: " + ans);
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
     _debug("msg sent to: " + name);
+    $(activechat).click();
 }
 
 function installbot(chats){
@@ -160,7 +161,7 @@ function chatbot() {
     if ( $('.bot.active').length == 0 )  return;
 
     //record current chat
-    var activechat = $('.activeColumn');
+    activechat = $('.activeColumn');
 
     //reply in current chat window
     typeof(observer) !== 'undefined' && observer.disconnect();
@@ -175,7 +176,7 @@ function chatbot() {
                 _debug("msg from: " + name);
                 if (newmsg) {
                     _debug("msg content: " + newmsg);
-                    callBotAPI(newmsg,sendmsg);
+                    callBotAPI(newmsg,sendmsg,name);
                 } else {
                     _debug("no msg found");
                 }
@@ -198,11 +199,10 @@ function chatbot() {
             newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
             if (newmsg) {
                 _debug("msg content: " + newmsg);
-                callBotAPI(newmsg,sendmsg);
+                callBotAPI(newmsg,sendmsg,name);
             } else {
                 _debug("no msg found");
             }
-            $(activechat).click();
         },500);
     });
 }
