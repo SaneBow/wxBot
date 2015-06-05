@@ -167,14 +167,16 @@ function chatbot() {
     if ( $('.activeColumn:has(".bot.active")').length ) {
         var lastchat = $('#chat_chatmsglist').children().last();
             if ($(lastchat).hasClass('chatItem you')) {
-            _debug("msg from: " + name);
-            if (newmsg) {
-                _debug("msg content: " + newmsg);
-                callBotAPI(newmsg,sendmsg,activechat);
-            } else {
-                _debug("no msg found");
+                var name = $(activechat).find('.left.name').text();
+                var newmsg = $(lastchat).find('pre').text();
+                _debug("msg from: " + name);
+                if (newmsg) {
+                    _debug("msg content: " + newmsg);
+                    callBotAPI(newmsg,sendmsg,activechat);
+                } else {
+                    _debug("no msg found");
+                }
             }
-        }
     }
 
     //reply for red dotted item
@@ -197,7 +199,7 @@ function chatbot() {
 }
 
 DEBUG = true;
-VERSION = "2.2.0";
+VERSION = "2.2.1";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
