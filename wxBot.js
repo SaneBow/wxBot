@@ -164,24 +164,17 @@ function chatbot() {
     var activechat = $('.activeColumn');
 
     //reply in current chat window
-    //not working now, deal with it later
-    typeof(observer) !== 'undefined' && observer.disconnect();
     if ( $('.activeColumn:has(".bot.active")').length ) {
-        var target = $('.activeColumn .descWrapper');
-        observer = new MutationObserver(function(mutations) {
-            var newmsg = target.find('.desc').text();
-            if ($('#chat_chatmsglist').children().last().hasClass('chatItem you')) {
-                var name = $(activechat).find('.left.name').text();
-                _debug("msg from: " + name);
-                if (newmsg) {
-                    _debug("msg content: " + newmsg);
-                    callBotAPI(newmsg,sendmsg,null,$(activechat));
-                } else {
-                    _debug("no msg found");
-                }
+        var lastchat = $('#chat_chatmsglist').children().last();
+            if ($(lastchat).hasClass('chatItem you')) {
+            _debug("msg from: " + name);
+            if (newmsg) {
+                _debug("msg content: " + newmsg);
+                callBotAPI(newmsg,sendmsg,activechat);
+            } else {
+                _debug("no msg found");
             }
-        });
-        observer.observe(target[0], {childList: true});
+        }
     }
 
     //reply for red dotted item
@@ -204,7 +197,7 @@ function chatbot() {
 }
 
 DEBUG = true;
-VERSION = "2.1.1";
+VERSION = "2.2.0";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
