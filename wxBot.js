@@ -2,7 +2,7 @@ function _debug(msg){
     DEBUG && console.log(msg);
 }
 
-function callBotAPI(newmsg,callback,activechat) {
+function callBotAPI(newmsg,callback,sendto,jumpback) {
     //YQL for cross region json ajax
     var yql_url = 'https://query.yahooapis.com/v1/public/yql';
     var url = 'http://www.tuling123.com/openapi/api?key=abab9d3783d6e367e71e56c721e3165a&info='+encodeURIComponent(newmsg);
@@ -16,7 +16,7 @@ function callBotAPI(newmsg,callback,activechat) {
         'dataType': 'jsonp',
         'success': function(response) {
             ans = response.query.results.json.text;
-            callback(ans,activechat);
+            callback(ans,sendto,jumpback);
         },
         'error': function() {
             _debug("ajax error occured");
@@ -24,8 +24,9 @@ function callBotAPI(newmsg,callback,activechat) {
     });
 }
 
-function sendmsg(ans,jumpback){
+function sendmsg_callback(ans,sendto,jumpback){
     _debug("bot resp with: " + ans);
+    sendto && $(sendto).click();
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
     $(jumpback).click();
@@ -163,6 +164,7 @@ function chatbot() {
     var activechat = $('.activeColumn');
 
     //reply in current chat window
+    //not working now, deal with it later
     typeof(observer) !== 'undefined' && observer.disconnect();
     if ( $('.activeColumn:has(".bot.active")').length ) {
         var target = $('.activeColumn .descWrapper');
@@ -173,7 +175,7 @@ function chatbot() {
                 _debug("msg from: " + name);
                 if (newmsg) {
                     _debug("msg content: " + newmsg);
-                    callBotAPI(newmsg,sendmsg,activechat);
+                    callBotAPI(newmsg,sendmsg,null,$(activechat);
                 } else {
                     _debug("no msg found");
                 }
@@ -185,27 +187,24 @@ function chatbot() {
     //reply for red dotted item
     $('.unreadDot:visible, .unreadDotS:visible').each(function()
     {
-        is_active = $(this).parent().find(".bot").hasClass("active");
+        var receiver = $(this).parent();
+        is_active = $(receiver).find(".bot").hasClass("active");
         if (!is_active) return;
-        var name = $(this).parent().find(".left.name").text();
+        var name = $(receiver).find(".left.name").text();
         _debug("msg from: " + name);
 
-        $(this).parent().click();
-        //Wait till chat box loaded
-        setTimeout(function(){
-            newmsg = $("#chat_chatmsglist").children(".chatItem.you").last().find("pre").text();
-            if (newmsg) {
-                _debug("msg content: " + newmsg);
-                callBotAPI(newmsg,sendmsg,activechat);
-            } else {
-                _debug("no msg found");
-            }
-        },500);
+        var newmsg = $(receiver).find('.desc').text();
+        if (newmsg) {
+            _debug("msg content: " + newmsg);
+            callBotAPI(newmsg,sendmsg_callback,$(receiver),$(activechat));
+        } else {
+            _debug("no msg found");
+        }
     });
 }
 
 DEBUG = true;
-VERSION = "2.0";
+VERSION = "2.1";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
