@@ -9,5 +9,8 @@
   2. javascript版微信机器人 (基于jQuery获取消息及完成各种动作) 
     * wxBot.js 
     * wxBot.css 
-  3. 微信机器人chrome插件 （就是一个加载js文件的插件外壳） 
-    * chrome-extension/* 
+  3. 微信机器人chrome插件 [[链接][extension]] （就是一个加载js文件的插件外壳） 
+    * chrome-extension/\* 
+
+
+[extension]: https://chrome.google.com/webstore/detail/%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA/eljagiebemmlfdmcbloojmgighfhgmom?hl=zh-CN
