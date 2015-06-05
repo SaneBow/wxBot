@@ -175,7 +175,7 @@ function chatbot() {
                 _debug("msg from: " + name);
                 if (newmsg) {
                     _debug("msg content: " + newmsg);
-                    callBotAPI(newmsg,sendmsg,null,$(activechat);
+                    callBotAPI(newmsg,sendmsg,null,$(activechat));
                 } else {
                     _debug("no msg found");
                 }
@@ -204,7 +204,7 @@ function chatbot() {
 }
 
 DEBUG = true;
-VERSION = "2.1";
+VERSION = "2.1.1";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
