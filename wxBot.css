@@ -15,6 +15,7 @@
 
 .chatPanel .chatListColumn.over{
     background-color: #81c348;
+    border: 2px solid white;
 }
 
 .bot-home {

@@ -172,7 +172,7 @@ function chatbot() {
                 _debug("msg from: " + name);
                 if (newmsg) {
                     _debug("msg content: " + newmsg);
-                    callBotAPI(newmsg,sendmsg,activechat);
+                    callBotAPI(newmsg,sendmsg_callback,activechat);
                 } else {
                     _debug("no msg found");
                 }
@@ -199,7 +199,7 @@ function chatbot() {
 }
 
 DEBUG = true;
-VERSION = "2.2.1";
+VERSION = "2.2.2";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
