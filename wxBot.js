@@ -3,19 +3,14 @@ function _debug(msg){
 }
 
 function callBotAPI(newmsg,callback,sendto,jumpback) {
-    //YQL for cross region json ajax
-    var yql_url = 'https://query.yahooapis.com/v1/public/yql';
-    var url = 'http://www.tuling123.com/openapi/api?key=abab9d3783d6e367e71e56c721e3165a&info='+encodeURIComponent(newmsg);
+    //jsonp proxy
+    var url = 'https://cuhk.me/wx/jsonp.php';
     $.ajax({
-        'url': yql_url,
-        'data': {
-              'q': 'SELECT * FROM json WHERE url="'+url+'"',
-                   'format': 'json',
-                   'jsonCompat': 'new',
-        },
+        'url': url,
+        'data': {msg: encodeURIComponent(newmsg), s: session_id} ,
         'dataType': 'jsonp',
         'success': function(response) {
-            ans = response.query.results.json.text;
+            ans = response.text;
             callback(ans,sendto,jumpback);
         },
         'error': function() {
@@ -127,6 +122,10 @@ function botinit(){
         _debug(bots.length.toString()+" bots initiated");
         //set chat list update listener
         setupdater();
+        //identify user by cookie
+        C = function(k){return encodeURIComponent(document.cookie.match(k+'=([^;]*)')[1])};
+        session_id = C('xsid');
+        nm = encodeURIComponent($('.myProfile .nickName').text());
     });
 }
 
