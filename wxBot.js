@@ -25,11 +25,11 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
 
 function sendmsg_callback(ans,sendto,jumpback){
     _debug("bot resp with: " + ans);
-    $(sendto).find('.desc').removeClass('read'); //clear read mark
     sendto && $(sendto).click();
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
     $(jumpback).click();
+    $(sendto).find('.desc').removeClass('read'); //clear read mark
 }
 
 function installbot(chats){
