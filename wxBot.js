@@ -17,13 +17,13 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
                 callback(ans,sendto,jumpback,'err');
             } else {
                 ans = response.text;
-                callback(ans,sendto,jumpback,'err');
+                callback(ans,sendto,jumpback);
             }
         },
         'error': function() {
             _debug("ajax error occured");
             ans = '太累了，我想休息一下，zzz～'; 
-            callback(ans,sendto,jumpback);
+            callback(ans,sendto,jumpback,'err');
         }
     });
 }
@@ -214,7 +214,7 @@ function chatbot() {
 }
 
 DEBUG = true;
-VERSION = "2.2.2";
+VERSION = "2.2.3";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
