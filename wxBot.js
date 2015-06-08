@@ -29,7 +29,11 @@ function sendmsg_callback(ans,sendto,jumpback){
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
     $(jumpback).click();
-    $(sendto).find('.desc').removeClass('read'); //clear read mark
+    var name = $(sendto).find('.left.name').text();
+    setTimeout(function(){
+        $(sendto).find('.desc').removeClass('read'); //clear read mark
+    },100); // dirty: prevent extreme timing case
+    _debug('msg sent to: '+name);
 }
 
 function installbot(chats){
