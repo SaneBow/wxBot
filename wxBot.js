@@ -11,11 +11,14 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
         'dataType': 'jsonp',
         'success': function(response) {
             if (typeof(response)=='undefined') {
-                ans = '太累了，我想休息一下，zzz～'; 
+                setTimeout(function(){
+                    ans = '太累了，我想休息一下，zzz～'; 
+                    callback(ans,sendto,jumpback);
+                },60*1000);
             } else {
                 ans = response.text;
+                callback(ans,sendto,jumpback);
             }
-            callback(ans,sendto,jumpback);
         },
         'error': function() {
             _debug("ajax error occured");
