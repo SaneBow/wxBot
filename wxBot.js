@@ -75,7 +75,7 @@ function buildbothome() {
     //add bot home
     $('#profile').append([
     '<div id="bot-wrapper">',
-        '<img class="bot-home botico" title="wxBot - a WeChat chat bot" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax1.png" draggable="true" />',
+        '<img class="bot-home botico" title="我是微信聊天机器人大白" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax1.png" draggable="true" />',
         '<span class="tooltip blink">',
             '<p>快把我拖到聊天列表上</p>',
             '<p>点击我可以 暂停/恢复</p>',
