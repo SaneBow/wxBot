@@ -80,11 +80,11 @@ debug("[-]Redirected to: %s\n" % redir)
 debug("[+]Parsing cookies")
 uin = r.cookies['wxuin']
 sid = r.cookies['wxsid']
+ticket = r.cookies['webwx_data_ticket'];
 skey = re.findall('<skey>(.*?)</skey>',r.content)[0]
-debug("[-]uin: %s, sid: %s, skey: %s\n" % (uin,sid,skey))
+debug("[.]uin: %s, sid: %s, ticket: %s\n[-]skey: %s\n" % (uin,sid,ticket,skey))
 
 # post for successful login
-"""
 debug("[+]Init: Fetch key 1,2,3")
 urlInit = "https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxinit?r=%s" % curTime()
 data_js = ('{"BaseRequest":'
@@ -97,10 +97,8 @@ r = s.post(urlInit,data=data_js)
 jsdata = json.loads(r.content)
 key1,key2,key3,key1000 = [keys['Val'] for keys in jsdata['SyncKey']['List']]
 debug("[-]Key1: %s, Key2: %s, Key3: %s, Key1000: %s\n" % (key1,key2,key3,key1000))
-"""
 
 # update msg list
-"""
 debug("[+]Fetch message update list")
 cTime = curTime()
 url = 'https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid=%s&r=%s' % (sid,cTime)
@@ -118,7 +116,6 @@ data_js = ('{"BaseRequest":{'
 r = s.post(url,data=data_js)
 log(r.content)
 debug("[-]\n")
-"""
 
 # fetch contact list
 debug("[+]Fetching contact list")

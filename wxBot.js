@@ -21,6 +21,7 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
 
 function sendmsg_callback(ans,sendto,jumpback){
     _debug("bot resp with: " + ans);
+    $(sendto).removeClass('read'); //clear read mark
     sendto && $(sendto).click();
     $('#textInput')[0].value=ans;
     $('.chatSend')[0].click();
@@ -165,9 +166,10 @@ function chatbot() {
     //reply in current chat window
     if ( $('.activeColumn:has(".bot.active")').length ) {
         var lastchat = $('#chat_chatmsglist').children().last();
-            if ($(lastchat).hasClass('chatItem you')) {
+            if ($(lastchat).not('.read').hasClass('chatItem you')) {  //has read or self msg
                 var name = $(activechat).find('.left.name').text();
                 var newmsg = $(lastchat).find('pre').text();
+                $(lastchat).addClass('read'); //add read mark
                 _debug("msg from: " + name);
                 if (newmsg) {
                     _debug("msg content: " + newmsg);
@@ -184,10 +186,11 @@ function chatbot() {
         var receiver = $(this).parent();
         is_active = $(receiver).find(".bot").hasClass("active");
         if (!is_active) return;
+        if ($(receiver).find('.desc').hasClass('read')) return;  //has read, wait for response
         var name = $(receiver).find(".left.name").text();
         _debug("msg from: " + name);
-
         var newmsg = $(receiver).find('.desc').text();
+        $(receiver).find('.desc').addClass('read'); // add read mark
         if (newmsg) {
             _debug("msg content: " + newmsg);
             callBotAPI(newmsg,sendmsg_callback,$(receiver),$(activechat));
