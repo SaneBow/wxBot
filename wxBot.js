@@ -10,7 +10,11 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
         'data': {msg: encodeURIComponent(newmsg), s: session_id} ,
         'dataType': 'jsonp',
         'success': function(response) {
-            ans = response.text;
+            if (typeof(response.text)=='undefined') {
+                ans = '太累了，我想休息一下，zzz～'; 
+            } else {
+                ans = response.text;
+            }
             callback(ans,sendto,jumpback);
         },
         'error': function() {
