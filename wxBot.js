@@ -9,8 +9,10 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
         'url': url,
         'data': {msg: encodeURIComponent(newmsg), s: session_id} ,
         'dataType': 'jsonp',
+        'timeout': 60000,
         'success': function(response) {
             if (typeof(response)=='undefined') {
+                _debug("no response error");
                 setTimeout(function(){
                     ans = '太累了，我想休息一下，zzz～'; 
                     callback(ans,sendto,jumpback);
@@ -22,6 +24,10 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
         },
         'error': function() {
             _debug("ajax error occured");
+            setTimeout(function(){
+                ans = '太累了，我想休息一下，zzz～'; 
+                callback(ans,sendto,jumpback);
+            },60*1000);
         }
     });
 }
