@@ -13,26 +13,22 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
         'success': function(response) {
             if (typeof(response)=='undefined') {
                 _debug("no response error");
-                setTimeout(function(){
-                    ans = '太累了，我想休息一下，zzz～'; 
-                    callback(ans,sendto,jumpback);
-                },60*1000);
+                ans = '太累了，我想休息一下，zzz～'; 
+                callback(ans,sendto,jumpback,'err');
             } else {
                 ans = response.text;
-                callback(ans,sendto,jumpback);
+                callback(ans,sendto,jumpback,'err');
             }
         },
         'error': function() {
             _debug("ajax error occured");
-            setTimeout(function(){
-                ans = '太累了，我想休息一下，zzz～'; 
-                callback(ans,sendto,jumpback);
-            },60*1000);
+            ans = '太累了，我想休息一下，zzz～'; 
+            callback(ans,sendto,jumpback);
         }
     });
 }
 
-function sendmsg_callback(ans,sendto,jumpback){
+function sendmsg_callback(ans,sendto,jumpback,flag){
     _debug("bot resp with: " + ans);
     sendto && $(sendto).click();
     $('#textInput')[0].value=ans;
@@ -41,7 +37,7 @@ function sendmsg_callback(ans,sendto,jumpback){
     var name = $(sendto).find('.left.name').text();
     setTimeout(function(){
         $(sendto).find('.desc').removeClass('read'); //clear read mark
-    },100); // dirty: prevent extreme timing case
+    }, (typeof(flag)!=='undefined' && flag=='err') ? 60*1000 : 100 ); // dirty: prevent extreme timing case
     _debug('msg sent to: '+name);
 }
 
