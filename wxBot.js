@@ -173,10 +173,10 @@ function chatbot() {
             if ($(lastchat).not('.read').hasClass('chatItem you')) {  //has read or self msg
                 var name = $(activechat).find('.left.name').text();
                 var newmsg = $(lastchat).find('pre').text();
-                $(lastchat).addClass('read'); //add read mark
                 _debug("msg from: " + name);
                 if (newmsg) {
                     _debug("msg content: " + newmsg);
+                    $(lastchat).addClass('read'); //add read mark
                     callBotAPI(newmsg,sendmsg_callback,activechat);
                 } else {
                     _debug("no msg found");
@@ -194,9 +194,9 @@ function chatbot() {
         var name = $(receiver).find(".left.name").text();
         _debug("msg from: " + name);
         var newmsg = $(receiver).find('.desc').text();
-        $(receiver).find('.desc').addClass('read'); // add read mark
         if (newmsg) {
             _debug("msg content: " + newmsg);
+            $(receiver).find('.desc').addClass('read'); // add read mark
             callBotAPI(newmsg,sendmsg_callback,$(receiver),$(activechat));
         } else {
             _debug("no msg found");
