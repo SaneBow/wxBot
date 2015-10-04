@@ -4,7 +4,7 @@
 	"name": "微信聊天机器人",
     "short_name": "wxBot",
 	"description": "运用于网页版微信的聊天机器人插件",
-	"version": "0.1",
+	"version": "0.2",
 	"author": "X.B.",
   
 	"background": {

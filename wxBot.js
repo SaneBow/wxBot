@@ -130,7 +130,7 @@ function botinit(){
         var bots = $(['.chat_item',
             ':not([data-cm=\'{"type":"chat","username":"newsapp"}\'])',
             ':not([data-cm=\'{"type":"chat","username":"filehelper"}\'])',
-            ':not([data-cm=\'{"type":"chat","username":"fmessage"}\'])'].join(''))
+            ':not([data-cm=\'{"type":"chat","username":"fmessage"}\'])'].join('')).parent();
         installbot(bots);
         _debug(bots.length.toString()+" bots initiated");
         //set chat list update listener
@@ -138,7 +138,7 @@ function botinit(){
         //identify user by cookie
         C = function(k){return encodeURIComponent(document.cookie.match(k+'=([^;]*)')[1])};
         session_id = C('xsid');
-        nm = encodeURIComponent($('.myProfile .nickName').text());
+        nm = encodeURIComponent($('.header .nickName').text());
     });
 }
 
@@ -153,7 +153,7 @@ function botupdate(){
             ':not([data-cm=\'{"type":"chat","username":"newsapp"}\'])',
             ':not([data-cm=\'{"type":"chat","username":"filehelper"}\'])',
             ':not([data-cm=\'{"type":"chat","username":"fmessage"}\'])',
-            ':not(:has(".bot"))'].join(''));
+            ':not(:has(".bot"))'].join('')).parent();
     uninstalled.length && installbot(uninstalled);
 }
 
