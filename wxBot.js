@@ -175,7 +175,7 @@ function chatbot() {
     var activechat = $('.chat_item.active');
 
     //reply in current chat window
-    if ( $('.chat_item.active:has(".bot.active")').length ) {
+    if ( $('.chat_item.active').parent(':has(".bot.active")').length ) {
         var lastchat = $('.message').last();
             if ($(lastchat).not('.read').hasClass('.you')) {  //has read or self msg
                 var name = $('.message .avatar').attr('title');
@@ -192,10 +192,10 @@ function chatbot() {
     }
 
     //reply for red dotted item
-    $('.web_wechat_reddot, .unreadDotS:visible').each(function()
+    $('.web_wechat_reddot, .web_wechat_reddot_middle').each(function()
     {
         var receiver = $(this).parent().parent();
-        is_active = $(receiver).find(".bot").hasClass("active");
+        is_active = $(receiver).parent().find(".bot").hasClass("active");
         if (!is_active) return;
         if ($(receiver).hasClass('read')) return;  //has read, wait for response
         var name = $(receiver).find(".nickname_text").text();
@@ -213,7 +213,7 @@ function chatbot() {
 
 delete console;
 DEBUG = true;
-VERSION = "3.0.1";
+VERSION = "3.0.2";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
