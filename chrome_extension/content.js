@@ -27,7 +27,7 @@ function waitForElementToDisplay(selector, time) {
     }
 }
 
-waitForElementToDisplay('#accountAvatarWrapper',1000);
+waitForElementToDisplay('.header',1000);
 
 //set up a messager to fetch settings
 //chrome.runtime.sendMessage({action: "getSettings"}, function(response) {

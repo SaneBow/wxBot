@@ -31,12 +31,12 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
 function sendmsg_callback(ans,sendto,jumpback,flag){
     _debug("bot resp with: " + ans);
     sendto && $(sendto).click();
-    $('#textInput')[0].value=ans;
-    $('.chatSend')[0].click();
+    $('#editArea').text(ans);
+    $('.chatSend').click();
     $(jumpback).click();
-    var name = $(sendto).find('.left.name').text();
+    var name = $(sendto).find(".nickname_text").text();
     setTimeout(function(){
-        $(sendto).find('.desc').removeClass('read'); //clear read mark
+        $(sendto).removeClass('read'); //clear read mark
     }, (typeof(flag)!=='undefined' && flag=='err') ? 60*1000 : 100 ); // dirty: prevent extreme timing case
     _debug('msg sent to: '+name);
 }
@@ -111,12 +111,12 @@ function buildbothome() {
     $('.bot-home').on({
         dragstart: function() {
             $(this).css('opacity', '0.5');
-            $('.chatListColumn *').css('pointer-events','none');
+            $('.chat_item').css('pointer-events','none');
         },
         dragend: function() {
             $(this).css('opacity', '1');
-            $('.chatListColumn *').css('pointer-events','');
-            $('.chatListColumn').removeClass('over');
+            $('.chat_item').css('pointer-events','');
+            $('.chat_item').removeClass('over');
         },
     });
     _debug("bot home constructed");
@@ -127,11 +127,10 @@ function botinit(){
         //init bot-home
         buildbothome();
         //init bot divs
-        var bots = $(['.chatListColumn',
-            ':not([un="newsapp"])',
-            ':not([un="filehelper"])',
-            ':not([un="fmessage"])',
-            ':not(".loadMoreConv")'].join(''))
+        var bots = $(['.chat_item',
+            ':not([data-cm=\'{"type":"chat","username":"newsapp"}\'])',
+            ':not([data-cm=\'{"type":"chat","username":"filehelper"}\'])',
+            ':not([data-cm=\'{"type":"chat","username":"fmessage"}\'])'].join(''))
         installbot(bots);
         _debug(bots.length.toString()+" bots initiated");
         //set chat list update listener
@@ -150,11 +149,10 @@ function botstart(interval){
 }
 
 function botupdate(){
-    uninstalled = $(['.chatListColumn',
-            ':not([un="newsapp"])',
-            ':not([un="filehelper"])',
-            ':not([un="fmessage"])',
-            ':not(".loadMoreConv")',
+    uninstalled = $(['.chat_item',
+            ':not([data-cm=\'{"type":"chat","username":"newsapp"}\'])',
+            ':not([data-cm=\'{"type":"chat","username":"filehelper"}\'])',
+            ':not([data-cm=\'{"type":"chat","username":"fmessage"}\'])',
             ':not(:has(".bot"))'].join(''));
     uninstalled.length && installbot(uninstalled);
 }
@@ -163,7 +161,7 @@ function setupdater() {
     updater = new MutationObserver(function(mutations) {
         botupdate();
     });
-    updater.observe($('#conversationContainer')[0], { childList: true});
+    updater.observe($('.chat_bd.scroll-content')[0], { childList: true});
     _debug('updater set');
 }
 
@@ -174,14 +172,14 @@ function chatbot() {
     if ( $('.bot.active').length == 0 )  return;
 
     //record current chat
-    var activechat = $('.activeColumn');
+    var activechat = $('.chat_item.active');
 
     //reply in current chat window
-    if ( $('.activeColumn:has(".bot.active")').length ) {
-        var lastchat = $('#chat_chatmsglist').children().last();
-            if ($(lastchat).not('.read').hasClass('chatItem you')) {  //has read or self msg
-                var name = $(activechat).find('.left.name').text();
-                var newmsg = $(lastchat).find('pre').text();
+    if ( $('.chat_item.active:has(".bot.active")').length ) {
+        var lastchat = $('.message').last();
+            if ($(lastchat).not('.read').hasClass('.you')) {  //has read or self msg
+                var name = $('.message .avatar').attr('title');
+                var newmsg = $(lastchat).text();
                 _debug("msg from: " + name);
                 if (newmsg) {
                     _debug("msg content: " + newmsg);
@@ -194,18 +192,18 @@ function chatbot() {
     }
 
     //reply for red dotted item
-    $('.unreadDot:visible, .unreadDotS:visible').each(function()
+    $('.web_wechat_reddot, .unreadDotS:visible').each(function()
     {
-        var receiver = $(this).parent();
+        var receiver = $(this).parent().parent();
         is_active = $(receiver).find(".bot").hasClass("active");
         if (!is_active) return;
-        if ($(receiver).find('.desc').hasClass('read')) return;  //has read, wait for response
-        var name = $(receiver).find(".left.name").text();
+        if ($(receiver).hasClass('read')) return;  //has read, wait for response
+        var name = $(receiver).find(".nickname_text").text();
         _debug("msg from: " + name);
-        var newmsg = $(receiver).find('.desc').text();
+        var newmsg = $(receiver).find('.msg').text();
         if (newmsg) {
             _debug("msg content: " + newmsg);
-            $(receiver).find('.desc').addClass('read'); // add read mark
+            $(receiver).addClass('read'); // add read mark
             callBotAPI(newmsg,sendmsg_callback,$(receiver),$(activechat));
         } else {
             _debug("no msg found");

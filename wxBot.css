@@ -1,4 +1,4 @@
-.chatPanel .chatListColumn .bot{
+.chat_item .bot{
     height: 30px;
     width: 30px;
     background: url('https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax2.png') no-repeat;
@@ -9,11 +9,11 @@
     display:none;
 }
 
-.chatPanel .chatListColumn .bot.active{
+.chat_item .bot.active{
     display:inline;
 }
 
-.chatPanel .chatListColumn.over{
+.chat_item.over{
     background-color: #81c348;
     border: 2px solid white;
 }
@@ -22,15 +22,15 @@
     height: 60px;
     width: 60px;
     position: absolute;
-    left: 190px;
-    top: -27px;
+    left: 160px;
+    top: 10px;
 }
 
 .bot-home.pauseico {
     height: 30px;
     width: 30px;
-    left: 220px;
-    top: 5px;
+    left: 180px;
+    top: 40px;
     display:none;
 }
 
@@ -39,6 +39,7 @@
 }
 
 span.tooltip {
+    z-index: 9999;
     position: absolute;
     width: 244px;
     height: 96px;
@@ -68,7 +69,7 @@ span.tooltip:after {
 
 #bot-wrapper span {
     right:-270px;
-    top:-30px;
+    top:10px;
     opacity:0.8;
     display:none;
 }
