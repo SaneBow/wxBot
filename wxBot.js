@@ -32,7 +32,7 @@ function sendmsg_callback(ans,sendto,jumpback,flag){
     _debug("bot resp with: " + ans);
     sendto && $(sendto).click();
     $('#editArea').text(ans);
-    $('.chatSend').click();
+    $('.btn_send').click();
     $(jumpback).click();
     var name = $(sendto).find(".nickname_text").text();
     setTimeout(function(){
