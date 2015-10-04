@@ -161,7 +161,7 @@ function setupdater() {
     updater = new MutationObserver(function(mutations) {
         botupdate();
     });
-    updater.observe($('.chat_list.scroll-content')[0], { childList: true});
+    updater.observe($('.chat_list.scroll-content').children('.ng-scope')[0], { childList: true});
     _debug('updater set');
 }
 
@@ -213,7 +213,7 @@ function chatbot() {
 
 delete console;
 DEBUG = true;
-VERSION = "3.0.0";
+VERSION = "3.0.1";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
