@@ -30,8 +30,16 @@ function callBotAPI(newmsg,callback,sendto,jumpback) {
 
 function sendmsg_callback(ans,sendto,jumpback,flag){
     _debug("bot resp with: " + ans);
+    filehelper = $('.chat_item[data-cm=\'{"type":"chat","username":"filehelper"}\']');
     sendto && $(sendto).click();
     $('#editArea').text(ans);
+
+    //jump out and in again to be able to send msg (unknown reason)
+    //jump out
+    $(filehelper).click();
+    //jump in
+    $(sendto).click();
+    
     $('.btn_send').click();
     $(jumpback).click();
     var name = $(sendto).find(".nickname_text").text();
@@ -200,7 +208,7 @@ function chatbot() {
         if ($(receiver).hasClass('read')) return;  //has read, wait for response
         var name = $(receiver).find(".nickname_text").text();
         _debug("msg from: " + name);
-        var newmsg = $(receiver).find('.msg').text();
+        var newmsg = $.trim($(receiver).find('.msg').text());
         if (newmsg) {
             _debug("msg content: " + newmsg);
             $(receiver).addClass('read'); // add read mark
