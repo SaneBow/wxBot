@@ -161,7 +161,7 @@ function setupdater() {
     updater = new MutationObserver(function(mutations) {
         botupdate();
     });
-    updater.observe($('.chat_bd.scroll-content')[0], { childList: true});
+    updater.observe($('.chat_list.scroll-content')[0], { childList: true});
     _debug('updater set');
 }
 
