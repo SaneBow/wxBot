@@ -213,7 +213,7 @@ function chatbot() {
 
 delete console;
 DEBUG = true;
-VERSION = "2.2.3";
+VERSION = "3.0.0";
 botinit();
 botstart(runtimeGlobal.interval);
 botupdate();
