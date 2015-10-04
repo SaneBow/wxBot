@@ -58,7 +58,7 @@ function installbot(chats){
 
     //add drag drop event to bot div
     jQuery.event.props.push('dataTransfer');
-    $(chats).on({
+    $(chats).parent().on({
         dragenter: function(e) {
             $(this).addClass('over');
         },
@@ -130,7 +130,7 @@ function botinit(){
         var bots = $(['.chat_item',
             ':not([data-cm=\'{"type":"chat","username":"newsapp"}\'])',
             ':not([data-cm=\'{"type":"chat","username":"filehelper"}\'])',
-            ':not([data-cm=\'{"type":"chat","username":"fmessage"}\'])'].join('')).parent();
+            ':not([data-cm=\'{"type":"chat","username":"fmessage"}\'])'].join(''))
         installbot(bots);
         _debug(bots.length.toString()+" bots initiated");
         //set chat list update listener
@@ -153,7 +153,7 @@ function botupdate(){
             ':not([data-cm=\'{"type":"chat","username":"newsapp"}\'])',
             ':not([data-cm=\'{"type":"chat","username":"filehelper"}\'])',
             ':not([data-cm=\'{"type":"chat","username":"fmessage"}\'])',
-            ':not(:has(".bot"))'].join('')).parent();
+            ':not(:has(".bot"))'].join(''));
     uninstalled.length && installbot(uninstalled);
 }
 
