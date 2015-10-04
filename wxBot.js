@@ -78,7 +78,7 @@ function installbot(chats){
 
 function buildbothome() {
     //add bot home
-    $('#profile').append([
+    $('.header').append([
     '<div id="bot-wrapper">',
         '<img class="bot-home botico" title="我是微信聊天机器人大白" src="https://raw.githubusercontent.com/SaneBow/wxBot/master/icons/baymax1.png" draggable="true" />',
         '<span class="tooltip blink">',
@@ -213,6 +213,7 @@ function chatbot() {
     });
 }
 
+delete console;
 DEBUG = true;
 VERSION = "2.2.3";
 botinit();
