@@ -68,13 +68,13 @@ function installbot(chats){
     jQuery.event.props.push('dataTransfer');
     $(chats).parent().on({
         dragenter: function(e) {
-            $(this).addClass('over');
+            $(this).children().addClass('over');
         },
         dragover: function(e) {
             e.preventDefault();
         },
         dragleave: function(e) {
-            $(this).removeClass('over');
+            $(this).children().removeClass('over');
         },
         drop: function() {
             $(this).find('.bot').toggleClass('active');
